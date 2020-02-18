@@ -2,8 +2,8 @@ package Lecture12;
 
 public class StackUsingArrays {
 	
-	private int[] data;
-	private int tos;
+	protected int[] data;
+	protected int tos;
 	
 	public static final int DEFAULT_CAPACITY=10;
 	public StackUsingArrays() throws Exception {

@@ -1,5 +1,6 @@
 package Lecture13;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class next_greater {
@@ -21,6 +22,7 @@ public class next_greater {
 			}
 			
 			stack.push(arr[i]);
+			
 		}
 		
 		while(!stack.isEmpty()) {
