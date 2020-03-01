@@ -208,6 +208,4 @@ public class LinkedList {
 		this.tail = temp;
 		this.tail.next = null;
 	}
-
-
 }
