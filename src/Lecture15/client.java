@@ -23,6 +23,16 @@ public class client {
 //		list.removeFirst();
 //		list.removeAt(4);
 //		list.removeLast();
+		
+		list.display();
+		
+		System.out.println(list.mid());
+		System.out.println(list.KthNodeFromEnd(4));
+		
+		//list.createCycle();
+		System.out.println(list.detectCycle());
+		
+		list.reverseDR();
 		list.display();
 	}
 

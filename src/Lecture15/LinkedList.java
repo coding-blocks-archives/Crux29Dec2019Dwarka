@@ -208,4 +208,89 @@ public class LinkedList {
 		this.tail = temp;
 		this.tail.next = null;
 	}
+	
+	public int mid() {
+		return this.getmidNode().data;
+	}
+	
+	private Node getmidNode() {
+		Node slow=this.head;
+		Node fast=this.head;
+		
+		while(fast.next!=null&&fast.next.next!=null) {
+			fast=fast.next.next;
+			slow=slow.next;
+		}
+		
+		return slow;
+	}
+	
+	
+	public int KthNodeFromEnd(int k) throws Exception {
+		Node slow=this.head;
+		Node fast=this.head;
+		for(int i=0;i<k;i++) {
+			fast=fast.next;
+		}
+		
+		while(fast!=null) {
+			slow=slow.next;
+			fast=fast.next;
+		}
+		
+		return slow.data;
+	}
+	
+	public void createCycle() throws Exception {
+		Node temp=this.getNodeAt(2);
+		this.tail.next=temp;
+	}
+	
+	public boolean detectCycle() {
+		
+		Node slow=this.head;
+		Node fast=this.head;
+		
+		while(fast.next!=null&&fast.next.next!=null) {
+			fast=fast.next.next;
+			slow=slow.next;
+			if(fast==slow) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	
+	public void reverseDR() {
+		HeapMover hm=new HeapMover(this.head);
+		reverseDR(hm, this.head, 0);
+	}
+	
+	private void reverseDR(HeapMover hm,Node right,int level) {
+		if(right==null) {
+			return;
+		}
+		
+		reverseDR(hm, right.next, level+1);
+		if(level>=this.size/2) {
+			int temp=hm.node.data;
+			hm.node.data=right.data;
+			right.data=temp;
+			hm.node=hm.node.next;
+			
+		}
+		
+		
+	}
+	
+	private class HeapMover{
+		Node node;
+		HeapMover(Node node){
+			this.node=node;
+		}
+	}
+	
+	
 }

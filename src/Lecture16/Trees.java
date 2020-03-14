@@ -187,5 +187,45 @@ public class Trees {
 		this.mirror(node.left);
 		this.mirror(node.right);
 	}
+	
+	public int diameter() {
+		return this.diameter(this.root);
+	}
+
+	private int diameter(Node node) {
+		if (node == null) {
+			return 0;
+		}
+		// diametert passes through root
+		int f1 = this.height(node.left) + this.height(node.right) + 2;
+
+		int f2 = this.diameter(node.left);
+
+		int f3 = this.diameter(node.right);
+
+		int myans = Math.max(f1, Math.max(f2, f3));
+		return myans;
+	}
+	
+	
+	public boolean isBst() {
+		return this.isBst(this.root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+	}
+
+	private boolean isBst(Node node, int min, int max) {
+		if (node == null) {
+			return true;
+		}
+		if (node.data < min || node.data > max) {
+			return false;
+		} else if (!this.isBst(node.left, min, node.data)) {
+			return false;
+		} else if (!this.isBst(node.right, node.data, max)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 
 }

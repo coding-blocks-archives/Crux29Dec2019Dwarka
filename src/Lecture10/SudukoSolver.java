@@ -22,9 +22,6 @@ public class SudukoSolver {
 		}else {
 			System.out.println("Can't solve");
 		}
-		
-		
-
 	}
 	
 	public static boolean sudukosolver(int[][] board,boolean[][] fixedcells,int row,int col,int n) {
