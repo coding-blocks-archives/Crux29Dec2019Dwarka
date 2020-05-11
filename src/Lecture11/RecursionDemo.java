@@ -4,7 +4,7 @@ public class RecursionDemo {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		// lexico(1000, 0);
+		 lexico(1000, 0);
 
 //		int n = 7;
 //		boolean[] primes = new boolean[n + 1];

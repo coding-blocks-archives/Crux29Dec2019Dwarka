@@ -15,7 +15,7 @@ public class RecursionDemo {
 		System.out.println(pbetter(2, 10));
 		System.out.println(friendPairing(6));
 		System.out.println(moveAllxAtEnd("abxhfxfgxxxghsxxd"));
-		
+
 	}
 
 	public static void PD(int n) {
@@ -125,21 +125,21 @@ public class RecursionDemo {
 		int d = (n - 1) * friendPairing(n - 2);
 		return s + d;
 	}
-	
+
 	public static String moveAllxAtEnd(String str) {
-		if(str.length()==0) {
+		if (str.length() == 0) {
 			return "";
 		}
-		char cc=str.charAt(0);
-		String ans="";
-		if(cc=='x') {
-			String restans=moveAllxAtEnd(str.substring(1));
-			ans=restans+'x';
-		}else {
-			String restans=moveAllxAtEnd(str.substring(1));
-			ans=cc+restans;
+		char cc = str.charAt(0);
+		String ans = "";
+		if (cc == 'x') {
+			String restans = moveAllxAtEnd(str.substring(1));
+			ans = restans + 'x';
+		} else {
+			String restans = moveAllxAtEnd(str.substring(1));
+			ans = cc + restans;
 		}
-		
+
 		return ans;
 	}
 

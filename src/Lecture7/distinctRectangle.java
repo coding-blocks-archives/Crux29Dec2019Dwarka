@@ -5,8 +5,8 @@ public class distinctRectangle {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		int[] arr= {2,3,5};
-		int area=15;
+		int[] arr= {1,2,3,4,5};
+		int area=10;
 		
 		int left=0;
 		int right=arr.length-1;

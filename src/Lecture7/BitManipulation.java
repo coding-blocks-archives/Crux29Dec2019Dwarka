@@ -77,7 +77,7 @@ public class BitManipulation {
 		}
 		System.out.println(z);
 		int set_bit = z & ~(z - 1);
-		// System.out.println(set_bit);
+		System.out.println(set_bit);
 
 		int group1 = 0, group2 = 0;
 		for (int i = 0; i < arr.length; i++) {

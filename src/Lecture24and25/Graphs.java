@@ -1,11 +1,11 @@
 package Lecture24and25;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
-import java.util.Stack;
 
 public class Graphs {
 
@@ -216,4 +216,88 @@ public class Graphs {
 			
 		}
 	}
+	
+	public void Djikstra(String src1) {
+		int[] dis=new int[this.vtces.size()];
+		for(int i=0;i<dis.length;i++) {
+			dis[i]=Integer.MAX_VALUE;
+		}
+		
+		Vertex v=this.vtces.get(src1);
+		dis[src1.charAt(0)-65]=0;
+		
+		Queue<String> q=new LinkedList<>();
+		q.add(src1);
+		
+		while(!q.isEmpty()) {
+			String str=q.remove();
+			Vertex vtx=this.vtces.get(str);
+			Set<Vertex> nbrs=vtx.nbrs.keySet();
+			for(Vertex nbr:nbrs) {
+				int oldcost=dis[nbr.name.charAt(0)-65];
+				int newcost=dis[vtx.name.charAt(0)-65]+vtx.nbrs.get(nbr);
+				if(newcost<oldcost) {
+					dis[nbr.name.charAt(0)-65]=newcost;
+					q.add(nbr.name);
+				}
+			}
+		}
+		
+		for(int i=0;i<dis.length;i++) {
+			System.out.print(dis[i]+" ");
+		}
+	}
+	
+	public boolean isConnected() {
+		HashMap<Vertex, Boolean> visited = new HashMap<>();
+		LinkedList<Vertex> queue = new LinkedList<>();
+		Collection<Vertex> vtces = this.vtces.values();
+		queue.add((Vertex) vtces.toArray()[0]);
+		while (!queue.isEmpty()) {
+			Vertex rvtx = queue.remove();
+			if (!visited.containsKey(rvtx)) {
+				visited.put(rvtx, true);
+				// System.out.print(rvtx.name+" ");
+				Set<Vertex> nbrs = rvtx.nbrs.keySet();
+				for (Vertex nbr : nbrs) {
+					if (!visited.containsKey(nbr)) {
+						queue.add(nbr);
+					}
+				}
+			}
+		}
+
+		return this.vtces.size() == visited.size();
+	}
+
+	public ArrayList<ArrayList<String>> getCC() {
+		ArrayList<ArrayList<String>> list = new ArrayList<>();
+		HashMap<Vertex, Boolean> visited = new HashMap<>();
+		LinkedList<Vertex> queue = new LinkedList<>();
+		Collection<Vertex> vtces = this.vtces.values();
+		for (Vertex vtx : vtces) {
+			if (!visited.containsKey(vtx)) {
+				queue.add(vtx);
+			}
+			ArrayList<String> cc = new ArrayList<>();
+			while (!queue.isEmpty()) {
+				Vertex rvtx = queue.remove();
+				if (!visited.containsKey(rvtx)) {
+					visited.put(rvtx, true);
+					cc.add(rvtx.name);
+					Set<Vertex> nbrs = rvtx.nbrs.keySet();
+					for (Vertex nbr : nbrs) {
+						if (!visited.containsKey(nbr)) {
+							queue.add(nbr);
+						}
+					}
+				}
+			}
+			if (cc.size() != 0) {
+				list.add(cc);
+			}
+		}
+		return list;
+	}
+	
 }

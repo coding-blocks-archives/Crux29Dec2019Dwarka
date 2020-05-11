@@ -33,11 +33,13 @@ public class client {
 		//graph.removeVertex("A");
 		graph.display();
 		
-		System.out.println(graph.hasPath("A", "G"));
-		graph.bft();
-		System.out.println();
-		graph.dft();
+//		System.out.println(graph.hasPath("A", "G"));
+//		graph.bft();
+//		System.out.println();
+//		graph.dft();
 	//	graph.dft();
+		
+		graph.Djikstra("A");
 	}
 	
 	

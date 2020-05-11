@@ -226,6 +226,84 @@ public class Trees {
 			return true;
 		}
 	}
+	
+	
+	public int largestBst() {
+		return this.largestBst(this.root).ans;
+	}
+
+	private Info largestBst(Node node) {
+		if (node == null) {
+			return new Info(0, Integer.MAX_VALUE, Integer.MIN_VALUE, true);
+		}
+		Info left = this.largestBst(node.left);
+		Info right = this.largestBst(node.right);
+
+		Info myinfo = new Info();
+
+		myinfo.size = left.size + right.size + 1;
+		myinfo.max = Math.max(left.max, Math.max(node.data, right.max));
+		myinfo.min = Math.min(left.min, Math.min(node.data, right.min));
+
+		if (left.isbst && right.isbst && node.data > left.max && node.data < right.min) {
+			myinfo.isbst = true;
+			myinfo.ans = myinfo.size;
+			return myinfo;
+		}
+
+		myinfo.isbst = false;
+		myinfo.ans = Math.max(left.ans, right.ans);
+		return myinfo;
+
+	}
+
+	public class Info {
+		int size;
+		int max;
+		int min;
+		boolean isbst;
+		int ans;
+
+		public Info() {
+			// TODO Auto-generated constructor stub
+		}
+
+		public Info(int size, int min, int max, boolean isbst) {
+			this.size = size;
+			this.min = min;
+			this.max = max;
+			this.isbst = isbst;
+		}
+	}
+
+	
+	public Trees(int[] pre, int[] in, boolean dontcare) {
+		this.root = this.constructPre(pre, 0, pre.length - 1, in, 0, in.length - 1);
+	}
+
+	private Node constructPre(int[] pre, int presi, int preei, int[] in, int insi, int inei) {
+		if (presi > preei || insi > inei) {
+			return null;
+		}
+
+		Node node = new Node(pre[presi], null, null);
+		this.size++;
+
+		int si = -1;
+		for (int i = insi; i <= inei; i++) {
+			if (in[i] == node.data) {
+				si = i;
+				break;
+			}
+		}
+
+		int lsi = si - insi;
+		node.right = this.constructPre(pre, presi + lsi + 1, preei, in, si + 1, inei);
+
+		node.left = this.constructPre(pre, presi + 1, presi + lsi, in, insi, si - 1);
+
+		return node;
+	}
 
 
 }
